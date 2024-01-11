@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TemplateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 });
+
+Route::middleware(['statuslogin'])->group(function(){
+    Route::get('template',[TemplateController::class,'template']);
+});
+
+Route::post('user/auth',[LoginController::class,'auth']);
+Route::get('user/logout',[LoginController::class,'logout']);
+
+
+
 
